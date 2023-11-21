@@ -1,0 +1,5 @@
+4.2v  Vin   R1 300   R2 1k      Vout   3.2307692308
+
+9v    Vin   R1 2.2k  R2 1.3k    Vout   3.3428571429
+
+24v   Vin   R1 10k   R2 1.3k    Vout   2.7610619469
