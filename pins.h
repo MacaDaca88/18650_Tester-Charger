@@ -26,7 +26,7 @@
 
 #endif
 #ifdef UNO
-#error "no A7"
+#warning "no A7 u dumb dumb"
 #endif
 
 #ifdef ESP32
@@ -40,8 +40,8 @@
 #define LED 2
 
 #define BUTTON1 15
-#define BUTTON2 4
-#define BUTTON3 0
+#define BUTTON2 0
+#define BUTTON3 4
 
 
 #define RES 27    // res

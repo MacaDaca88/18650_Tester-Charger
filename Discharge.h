@@ -1,6 +1,13 @@
 #ifndef DISCHARGE_H
 #define DISCHARGE_H
 
+int discharge;
+
+int dischargeBox;
+
+float dischargeVolts;
+
+
 void readDrain() {
 
   discharge = analogRead(DISCHARGE);
