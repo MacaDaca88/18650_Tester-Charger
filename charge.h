@@ -12,8 +12,8 @@ float R4 = 1300.0;
 
 int batt1Value = 0;
 int batt2Value = 0;
-int batt3Value = 0;
-int batt4Value = 0;
+int batt3Value;
+int batt4Value;
 
 float batt1;
 float batt2;

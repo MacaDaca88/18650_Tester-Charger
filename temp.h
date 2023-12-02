@@ -1,24 +1,40 @@
 #ifndef TEMP_H
 #define TEMP_H
 
-int temp = 0;
-int humid = 0;
+DHT_Unified dht(DHTPIN, DHTTYPE);
 
-int _temp;
-int _humid;
+
+float temp;
+float humid;
+
+float _temp;
+float _humid;
+
 
 void temps() {
 
-  temp = dht11.readTemperature() - 4;
-  humid = dht11.readHumidity();
+  sensors_event_t event;
 
-  if (temp != DHT11::ERROR_CHECKSUM && temp != DHT11::ERROR_TIMEOUT && humid != DHT11::ERROR_CHECKSUM && humid != DHT11::ERROR_TIMEOUT) {
+  dht.temperature().getEvent(&event);
+  temp = event.temperature;
 
+  if (isnan(event.temperature)) {
+    Serial.println(F("Error reading temperature!"));
+  } else {
     if (temp != _temp) {
       Serial.print("Temperature:");
       Serial.println(temp);
       _temp = temp;
     }
+  }
+
+
+  dht.humidity().getEvent(&event);
+  humid = event.relative_humidity;
+
+  if (isnan(event.relative_humidity)) {
+    Serial.println(F("Error reading humidity!"));
+  } else {
     if (humid != _humid) {
       Serial.print("Humidity:");
       Serial.println(humid);
@@ -26,5 +42,4 @@ void temps() {
     }
   }
 }
-
 #endif

@@ -3,7 +3,9 @@
 #include <Arduino.h>
 #include <U8g2lib.h>
 #include <SPI.h>
-#include <DHT11.h>
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <DHT_U.h>
 //#define UNO
 #include "pins.h"
 
@@ -19,7 +21,6 @@ U8G2_SSD1305_128X64_ADAFRUIT_F_4W_SW_SPI u8g2(U8G2_R2, /* clock=*/SCK, /* data=*
 
 ///////////////////////////////////////////////////
 
-DHT11 dht11(16);
 
 int button1 = 0;
 int button2 = 0;
@@ -38,7 +39,7 @@ enum MenuState {
   DRAIN
 };
 
-MenuState currentMenu = HOME;
+MenuState currentMenu = DRAIN;
 
 int Time = 0;
 int oldTime = 0;
@@ -54,9 +55,17 @@ void setup() {
   u8g2.clearBuffer();
   Serial.begin(115200);
   OTAinit();
+  dht.begin();
+  sensor_t sensor;
+
   pinMode(BUTTON1, INPUT_PULLUP);
   pinMode(BUTTON2, INPUT_PULLUP);
   pinMode(BUTTON3, INPUT_PULLUP);
+
+  pinMode(BATT1, INPUT);
+  pinMode(BATT2, INPUT);
+  pinMode(BATT3, INPUT);
+  pinMode(BATT4, INPUT);
 
   pinMode(LED, OUTPUT);
 
@@ -81,10 +90,10 @@ void loop() {
   button3 = digitalRead(BUTTON3);
 
 
-    Serial.println(batt3Value);
-    Serial.print("Battery 3 = ");
-    Serial.println(batt3);
-    
+  Serial.println(batt3Value);
+  Serial.print("Battery 4 = ");
+  Serial.println(batt4);
+
   if (button1 != button1State) {
     if (button1State == LOW) {
       counter++;

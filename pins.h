@@ -43,6 +43,10 @@
 #define BUTTON2 0
 #define BUTTON3 4
 
+#define DHTPIN 16     // Digital pin connected to the DHT sensor 
+
+#define DHTTYPE    DHT11     // DHT 11
+
 
 #define RES 27    // res
 
