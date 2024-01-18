@@ -1,7 +1,8 @@
-#ifdef WIFISTATE_H
-#define WIFISTATE_H
+//#ifdef WIFISTATE_H
+//#define WIFISTATE_H
+#include <WiFi.h>
 
-byte mac[6];
+
 
 void STATE() {
   while (WiFi.waitForConnectResult() != WL_CONNECTED) {
@@ -17,15 +18,14 @@ void STATE() {
   u8g2.clearBuffer();
   u8g2.setDrawColor(0);
   u8g2.drawBox(0, 0, 127, 63);
-  WiFi.macAddress(mac);
   u8g2.setDrawColor(1);
   u8g2.setCursor(0, 0);
   u8g2.print("ESP Board MAC Address:  ");
-  u8g2.print(mac);
+  u8g2.print(WiFi.macAddress());
   u8g2.setCursor(0, 40);
-  u8g2.print(WiFi.localip);
+  u8g2.print(WiFi.localIP());
   u8g2.sendBuffer();
 }
 
 
-#endif
+//#endif
