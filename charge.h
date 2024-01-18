@@ -2,7 +2,7 @@
 #define CHARGE_H
 
 float R3v = 690;
-float R3v2= 1000;
+float R3v2 = 1000;
 
 float R1 = 2000.0;
 float R2 = 1000.0;
@@ -67,7 +67,7 @@ void readCharge() {
   u8g2.setDrawColor(0);
   u8g2.drawBox(7, 15 + 40 - chargeBox1, 6, chargeBox1);
   if (batt1 != b1) {
-  //  Serial.println(batt1Value);
+    //  Serial.println(batt1Value);
     //Serial.print("Battery 1 = ");
     //Serial.println(batt1);
     b1 = batt1;
@@ -87,9 +87,9 @@ void readCharge() {
   u8g2.setDrawColor(0);
   u8g2.drawBox(32, 15 + 40 - chargeBox2, 6, chargeBox2);
   if (batt2 != b2) {
- //   Serial.println(batt2Value);
-  //  Serial.print("Battery 2 = ");
-  //  Serial.println(batt2);
+    //   Serial.println(batt2Value);
+    //  Serial.print("Battery 2 = ");
+    //  Serial.println(batt2);
     b2 = batt2;
   }
   u8g2.setDrawColor(1);
@@ -126,12 +126,22 @@ void readCharge() {
     Serial.println(batt4);
     b4 = batt4;
   }
-  u8g2.sendBuffer();
+  //u8g2.sendBuffer();
   if (batt4 >= 10.8) {
     digitalWrite(LED, 1);
   } else {
     digitalWrite(LED, 0);
   }
+
+  u8g2.setDrawColor(1);
+  u8g2.setFont(u8g2_font_5x7_tf);
+  u8g2.setCursor(50, 10);
+  u8g2.print("Temp = ");
+  u8g2.print(temp);
+  u8g2.setCursor(50, 20);
+  u8g2.print("Humid = ");
+  u8g2.print(humid);
+  u8g2.sendBuffer();
 }
 
 #endif

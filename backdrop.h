@@ -67,13 +67,12 @@ int screen = millis();
 
 void ScreenSaver() {
 
-  if (screen - cut >= screenSaver) {
-    cut = screen;
-    u8g2.clearBuffer();
-    u8g2.setDrawColor(1);
-    u8g2.drawXBM(0, 0, 128, 64, bitmap);
-    u8g2.sendBuffer();
-  }
+  u8g2.clearBuffer();
+  u8g2.setDrawColor(1);
+  u8g2.drawXBM(0, 0, 128, 64, bitmap);
+  u8g2.sendBuffer();
+  delay(1000);
 }
+
 
 #endif

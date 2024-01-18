@@ -30,13 +30,17 @@ int button1State = 0;
 int button2State = 0;
 int button3State = 0;
 
-bool chargeMenu = false;
-bool drainMenu = false;
+bool Charging = false;
+bool Home = false;
+bool Testing = false;
+bool Wifi = false;
+
 
 enum MenuState {
   HOME,
   CHARGE,
-  DRAIN
+  DRAIN,
+  WIFI
 };
 
 MenuState currentMenu = DRAIN;
@@ -50,6 +54,7 @@ int counter;
 #include "Discharge.h"
 #include "temp.h"
 #include "backdrop.h"
+#include "wifiState.h"
 
 void setup() {
   u8g2.clearBuffer();
@@ -110,9 +115,33 @@ void loop() {
         case CHARGE:
           currentMenu = DRAIN;
           break;
+        case WIFI:
+          currentMenu = WIFI;
+          break;
       }
     }
   }
+
+  switch (currentMenu) {
+    case HOME:
+      home();
+      Home = true;
+      break;
+
+    case CHARGE:
+      readCharge();
+      Charging = true;
+      break;
+
+    case DRAIN:
+      readDrain();
+      Testing = true;
+      break;
+    case WIFI:
+      STATE();
+      break;
+  }
+  button1State = button1;
 
   if (button2 != button2State) {
     if (button2State == LOW) {
@@ -120,19 +149,4 @@ void loop() {
     }
   }
   button2State = button2;
-
-  switch (currentMenu) {
-    case HOME:
-      home();
-      break;
-
-    case CHARGE:
-      readCharge();
-      break;
-
-    case DRAIN:
-      readDrain();
-      break;
-  }
-  button1State = button1;
 }
