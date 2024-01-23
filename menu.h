@@ -2,8 +2,6 @@
 #define MENU_H
 
 #include "temp.h"
-#include "backdrop.h"
-#include "ota.h"
 void home() {
 
   u8g2.clearBuffer();

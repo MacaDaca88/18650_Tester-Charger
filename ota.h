@@ -1,6 +1,9 @@
 #ifndef OTA_H
 #define OTA_H
 
+#include <ESPmDNS.h>
+#include <WiFiUdp.h>
+#include <ArduinoOTA.h>
 
 const char* ssid = "Tip-jar";
 const char* password = "PASSWORD1234LOL";

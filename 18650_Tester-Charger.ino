@@ -1,4 +1,5 @@
 
+#include <WiFi.h>
 
 #include <Arduino.h>
 #include <U8g2lib.h>
@@ -13,10 +14,6 @@ U8G2_SSD1305_128X64_ADAFRUIT_F_4W_SW_SPI u8g2(U8G2_R2, /* clock=*/SCK, /* data=*
 
 ///////////////////////OTA//////////////////////////
 
-#include <WiFi.h>
-#include <ESPmDNS.h>
-#include <WiFiUdp.h>
-#include <ArduinoOTA.h>
 #include "ota.h"
 
 ///////////////////////////////////////////////////
@@ -48,13 +45,11 @@ MenuState currentMenu = DRAIN;
 int Time = 0;
 int oldTime = 0;
 int counter;
-
+#include "wifiState.h"
 #include "menu.h"
 #include "charge.h"
 #include "Discharge.h"
-#include "temp.h"
 #include "backdrop.h"
-#include "wifiState.h"
 
 void setup() {
   u8g2.clearBuffer();
@@ -138,7 +133,7 @@ void loop() {
       Testing = true;
       break;
     case WIFI:
-      STATE();
+      State();
       break;
   }
   button1State = button1;
@@ -149,4 +144,10 @@ void loop() {
     }
   }
   button2State = button2;
+  if (button3 != button2State) {
+    if (button3State == LOW) {
+      State();
+    }
+  }
+  button3State = button3;
 }

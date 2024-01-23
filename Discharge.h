@@ -9,7 +9,6 @@ float dischargeVolts;
 
 
 void readDrain() {
-
   discharge = analogRead(DISCHARGE);
   dischargeVolts = discharge * (4.7 / 1023);
   dischargeBox = map(discharge, 0, 1023, 1, 50);
